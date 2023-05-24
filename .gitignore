@@ -33,3 +33,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# specific to this app
+example/node_modules
+example/npm-debug.log*
+example/yarn-debug.log*
+example/yarn-error.log*
+dist
+
+# temporary
+example

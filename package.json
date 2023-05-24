@@ -1,22 +1,25 @@
 {
   "name": "react-table",
   "version": "0.1.0",
-  "private": true,
+  "author": "Zeke Jeske",
+  "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "tsc"
   },
   "dependencies": {
-    "@types/node": "20.2.3",
+    "react-icons": "^4.8.0",
+    "styled-components": "^6.0.0-rc.1",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "eslint": "8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-next": "13.4.3",
-    "next": "13.4.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "prettier": "^2.8.8"
   }
 }
