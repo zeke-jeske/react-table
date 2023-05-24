@@ -1,7 +1,7 @@
 {
   "name": "@zeke-jeske/react-table",
   "description": "A simple and fully customizable React data table component.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Zeke Jeske",
   "license": "MIT",
   "main": "dist/components/Table.jsx",
