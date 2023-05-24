@@ -1,10 +1,15 @@
 {
   "name": "@zeke-jeske/react-table",
+  "description": "A simple and fully customizable React data table component.",
   "version": "0.1.0",
   "author": "Zeke Jeske",
   "license": "MIT",
+  "main": "dist/components/Table.jsx",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --build --verbose"
   },
   "dependencies": {
     "react-icons": "^4.8.0",
@@ -23,8 +28,6 @@
     "prettier": "^2.8.8"
   },
   "types": "./index.d.ts",
-  "description": "A simple and fully customizable React data table component.",
-  "main": "index.js",
   "directories": {
     "example": "example"
   },

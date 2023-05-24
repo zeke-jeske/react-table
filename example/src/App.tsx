@@ -1,13 +1,10 @@
-'use client'
-import Image from 'next/image'
 import { styled, createGlobalStyle } from 'styled-components'
-import Table from '../src/components/Table'
-import { FC, SetStateAction, useState } from 'react'
-import Row from '../src/components/Row'
-import Cell from '../src/components/Cell'
-import Head from 'next/head'
-import RowToggleBtn from '../src/components/RowToggleBtn'
-import ExpandedRow from '../src/components/ExpandedRow'
+import Table from '@zeke-jeske/react-table/src/components/Table'
+import { FC } from 'react'
+// import type Row from '../../index.d.ts'
+// import Cell from '../../src/components/Cell'
+// import RowToggleBtn from '../../src/components/RowToggleBtn'
+// import ExpandedRow from '../../src/components/ExpandedRow'
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -58,7 +55,7 @@ const After = styled.div`
   margin-top: 1.5rem;
 `
 
-const Home: FC = () => {
+const App: FC = () => {
   function generateData(): Row[] {
     const rows = [] as Row[]
     for (let i = 0; i < 10; i++) {
@@ -73,18 +70,6 @@ const Home: FC = () => {
 
   return (
     <Main>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <GlobalStyle />
       <h1>React Advanced Table example</h1>
       <Table
@@ -107,4 +92,4 @@ const Home: FC = () => {
   )
 }
 
-export default Home
+export default App
