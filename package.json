@@ -4,7 +4,8 @@
   "version": "0.1.1",
   "author": "Zeke Jeske",
   "license": "MIT",
-  "main": "dist/components/Table.jsx",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -27,7 +28,6 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "prettier": "^2.8.8"
   },
-  "types": "./index.d.ts",
   "directories": {
     "example": "example"
   },

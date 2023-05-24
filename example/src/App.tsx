@@ -1,5 +1,6 @@
 import { styled, createGlobalStyle } from 'styled-components'
-import Table from '@zeke-jeske/react-table/src/components/Table'
+import Table from '@zeke-jeske/react-table'
+import Cell from '@zeke-jeske/react-table'
 import { FC } from 'react'
 // import type Row from '../../index.d.ts'
 // import Cell from '../../src/components/Cell'
