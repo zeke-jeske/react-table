@@ -35,5 +35,13 @@
   "bugs": {
     "url": "https://github.com/zeke-jeske/react-table/issues"
   },
-  "homepage": "https://github.com/zeke-jeske/react-table#readme"
+  "homepage": "https://github.com/zeke-jeske/react-table#readme",
+  "keywords": [
+    "react",
+    "table",
+    "data",
+    "component",
+    "ui",
+    "library"
+  ]
 }
