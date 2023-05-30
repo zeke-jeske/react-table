@@ -100,7 +100,7 @@ const Rows = ({ handleToggleBtnClick, expandableRows, openRowKey, rows, keyIndex
         row.cells.map((cell, j) => (react_1.default.createElement(Cell_1.default, { key: j }, cell)))));
 })));
 // COMPONENT
-const Table = ({ rows, columns, className, getColId, expandedRowClassName, secondTablePartClassName, wrapperClassName, expandableRows = false, id, minCellWidth, overflowFix = false, }) => {
+const Table = ({ rows, columns, className, style, getColId, expandedRowClassName, expandedRowStyle, secondTablePartClassName, secondTablePartStyle, wrapperClassName, wrapperStyle, expandableRows = false, id, minCellWidth, overflowFix = false, }) => {
     // Props validation
     if (!expandableRows) {
         if (rows.some(({ expanded }) => expanded !== undefined)) {
@@ -145,8 +145,8 @@ const Table = ({ rows, columns, className, getColId, expandedRowClassName, secon
     function handleToggleBtnClick(key) {
         setOpenRowKey((prev) => (prev === key ? null : key));
     }
-    return (react_1.default.createElement(exports.Wrapper, { className: wrapperClassName },
-        react_1.default.createElement(TableEl_1.default, { overflowFix: overflowFix, className: className, ref: tableRef, style: { gridTemplateColumns }, id: id, 
+    return (react_1.default.createElement(exports.Wrapper, { className: wrapperClassName, style: wrapperStyle },
+        react_1.default.createElement(TableEl_1.default, { overflowFix: overflowFix, className: className, ref: tableRef, style: Object.assign({ gridTemplateColumns }, style), id: id, 
             // Plus 1 for the thead row
             numRows: beforeRows.length + 1, onScroll: handleScroll },
             react_1.default.createElement(exports.Thead, null,
@@ -160,8 +160,8 @@ const Table = ({ rows, columns, className, getColId, expandedRowClassName, secon
             react_1.default.createElement(exports.Tbody, null,
                 react_1.default.createElement(Rows, Object.assign({ rows: beforeRows }, { expandableRows, handleToggleBtnClick, openRowKey })))),
         openRow !== null && (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(ExpandedRow_1.default, { className: expandedRowClassName }, openRow.expanded),
-            react_1.default.createElement(TableEl_1.default, { overflowFix: overflowFix, style: { gridTemplateColumns }, numRows: afterRows.length, ref: secondTableRef, onScroll: handleScroll, className: secondTablePartClassName },
+            react_1.default.createElement(ExpandedRow_1.default, { className: expandedRowClassName, style: expandedRowStyle }, openRow.expanded),
+            react_1.default.createElement(TableEl_1.default, { overflowFix: overflowFix, style: Object.assign({ gridTemplateColumns }, secondTablePartStyle), numRows: afterRows.length, ref: secondTableRef, onScroll: handleScroll, className: secondTablePartClassName },
                 react_1.default.createElement(exports.Tbody, null,
                     react_1.default.createElement(Rows, Object.assign({ rows: afterRows, keyIndexOffset: beforeRows.length }, { expandableRows, handleToggleBtnClick, openRowKey }))))))));
 };

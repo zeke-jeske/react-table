@@ -18,6 +18,8 @@ export interface TableProps {
     columns: Column[];
     /** `className` to set on the HTML `table` element itself */
     className?: string;
+    /** CSS styles for the `table` element */
+    style?: React.CSSProperties;
     /** ID of the `table` element. */
     id: string;
     /** If true, rows will each get a toggle button that allows it to show additional contents.
@@ -31,12 +33,19 @@ export interface TableProps {
     overflowFix?: boolean;
     getColId?: (col: Column, colIndex: number, tableId: string) => string;
     rows: RowType[];
+    /** `className` for the expanded row section */
     expandedRowClassName?: string;
+    /** CSS styles for the expanded row section */
+    expandedRowStyle?: React.CSSProperties;
     /** When a row is expanded, this `className` will be set on the second half of the table below the
      * expanded section. */
     secondTablePartClassName?: string;
+    /** CSS styles for the second half of the table below the expanded section. */
+    secondTablePartStyle?: React.CSSProperties;
     /** This `className` is set on the `div` that contains the entire table. */
     wrapperClassName?: string;
+    /** CSS styles for the outermost `div` containing the entire table */
+    wrapperStyle?: React.CSSProperties;
     /** In pixels. Doesn't apply to fixedSize columns. */
     minCellWidth?: number;
 }
