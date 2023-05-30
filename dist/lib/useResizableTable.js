@@ -1,43 +1,34 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+const react_1 = require("react");
 /** Default minimum cell width, in pixels. */
-var DEFAULT_MIN_CELL_WIDTH = 144;
+const DEFAULT_MIN_CELL_WIDTH = 144;
 function getTemplateColumns(columns, minCellWidth) {
-    return columns.map(function (col) {
+    return columns.map((col) => {
         if (typeof col === 'string' || !col.fixedSize)
-            return "minmax(".concat(minCellWidth, "px, 1fr)");
+            return `minmax(${minCellWidth}px, 1fr)`;
         // Fixed size
         return 'min-content';
     });
 }
 /** A React custom hook that helps manage a table with resizable columns. */
-function useResizableTable(columns, minCellWidth) {
-    if (minCellWidth === void 0) { minCellWidth = DEFAULT_MIN_CELL_WIDTH; }
+function useResizableTable(columns, minCellWidth = DEFAULT_MIN_CELL_WIDTH) {
     /** Index of the column resizer that's currently being adjusted. */
-    var _a = (0, react_1.useState)(null), activeIndex = _a[0], setActiveIndex = _a[1];
+    const [activeIndex, setActiveIndex] = (0, react_1.useState)(null);
     /** Ref to an array of HTML column element references. */
-    var colRefs = (0, react_1.useRef)([]);
+    const colRefs = (0, react_1.useRef)([]);
     /** Ref to the table itself */
-    var tableRef = (0, react_1.useRef)(null);
+    const tableRef = (0, react_1.useRef)(null);
     // Get the initial grid template columns
-    var _b = (0, react_1.useState)(function () {
-        return getTemplateColumns(columns, minCellWidth);
-    }), gridTemplateColumns = _b[0], setGridTemplateColumns = _b[1];
+    const [gridTemplateColumns, setGridTemplateColumns] = (0, react_1.useState)(() => getTemplateColumns(columns, minCellWidth));
     // Update colRefs when columns changes
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         if (columns.length > colRefs.current.length) {
             // If there are more columns, create the refs
-            colRefs.current = __spreadArray(__spreadArray([], colRefs.current, true), new Array(columns.length - colRefs.current.length).fill(null), true);
+            colRefs.current = [
+                ...colRefs.current,
+                ...new Array(columns.length - colRefs.current.length).fill(null),
+            ];
         }
         else if (columns.length < colRefs.current.length) {
             // If there are less columns, remove the extras.
@@ -52,27 +43,27 @@ function useResizableTable(columns, minCellWidth) {
         setActiveIndex(i);
     }
     // Manage the window event listeners
-    (0, react_1.useEffect)(function () {
+    (0, react_1.useEffect)(() => {
         function mouseMove(e) {
             e.preventDefault();
             if (activeIndex === null)
                 return;
             // Get the current widths of all the columns
-            var widths = colRefs.current.map(function (colEl) { return colEl.offsetWidth; });
-            var activeCol = colRefs.current[activeIndex];
+            const widths = colRefs.current.map((colEl) => colEl.offsetWidth);
+            const activeCol = colRefs.current[activeIndex];
             // Calculate the column width
-            var newColWidth = e.clientX - activeCol.getBoundingClientRect().left;
+            let newColWidth = e.clientX - activeCol.getBoundingClientRect().left;
             if (newColWidth < minCellWidth)
                 newColWidth = minCellWidth;
             // Ensure that the columns take up the full width of the table
-            var totalWidth = widths.reduce(function (acc, width) { return acc + width; }, 0);
-            var tableWidth = tableRef.current.offsetWidth;
+            const totalWidth = widths.reduce((acc, width) => acc + width, 0);
+            const tableWidth = tableRef.current.offsetWidth;
             if (totalWidth < tableWidth) {
                 widths[activeIndex] += tableWidth - totalWidth;
             }
             // Make the update. Only the grid-template-column value corresponding to the modified column will be changed.
-            var newGridTemplateColumns = __spreadArray([], gridTemplateColumns, true);
-            newGridTemplateColumns[activeIndex] = "minmax(".concat(newColWidth, "px, 1fr)");
+            const newGridTemplateColumns = [...gridTemplateColumns];
+            newGridTemplateColumns[activeIndex] = `minmax(${newColWidth}px, 1fr)`;
             setGridTemplateColumns(newGridTemplateColumns);
         }
         function removeListeners() {
@@ -88,16 +79,16 @@ function useResizableTable(columns, minCellWidth) {
             window.addEventListener('mousemove', mouseMove);
             window.addEventListener('mouseup', mouseUp);
         }
-        return function () {
+        return () => {
             removeListeners();
         };
     }, [activeIndex, gridTemplateColumns, minCellWidth]);
     return {
         gridTemplateColumns: gridTemplateColumns.join(' '),
-        mouseDown: mouseDown,
-        colRefs: colRefs,
-        activeIndex: activeIndex,
-        tableRef: tableRef,
+        mouseDown,
+        colRefs,
+        activeIndex,
+        tableRef,
     };
 }
 exports.default = useResizableTable;

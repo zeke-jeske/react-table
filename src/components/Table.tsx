@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC } from 'react'
+import React, { useState, useRef, useEffect, FC } from 'react'
 import { styled } from 'styled-components'
 import useResizableTable from '../lib/useResizableTable'
 import Cell from './Cell'

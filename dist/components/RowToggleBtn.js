@@ -1,13 +1,12 @@
-import React, { type FC, type MouseEventHandler } from 'react'
-import { BsChevronRight } from 'react-icons/bs'
-import styled from 'styled-components'
-
-interface Props {
-  onClick: MouseEventHandler<HTMLButtonElement>
-  open: boolean
-}
-
-const Button = styled.button<{ open: boolean }>`
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const react_1 = __importDefault(require("react"));
+const bs_1 = require("react-icons/bs");
+const styled_components_1 = __importDefault(require("styled-components"));
+const Button = styled_components_1.default.button `
   --transition-duration: 0.1s;
   border: none;
   height: 1rem;
@@ -37,12 +36,7 @@ const Button = styled.button<{ open: boolean }>`
   }
 
   ${({ open }) => open && `transform: rotate(0.25turn);`}
-`
-
-const RowToggleBtn: FC<Props> = (props) => (
-  <Button {...props} type="button">
-    <BsChevronRight size="1rem" />
-  </Button>
-)
-
-export default RowToggleBtn
+`;
+const RowToggleBtn = (props) => (react_1.default.createElement(Button, Object.assign({}, props, { type: "button" }),
+    react_1.default.createElement(bs_1.BsChevronRight, { size: "1rem" })));
+exports.default = RowToggleBtn;

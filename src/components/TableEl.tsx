@@ -1,6 +1,6 @@
 // see https://medium.com/@justicart/overflow-x-scroll-overflow-y-visible-c1a98238e002
 
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import noScrollbar from '../lib/noScrollbar'
 
