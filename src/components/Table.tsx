@@ -21,7 +21,7 @@ export type Column =
     }
   | string
 
-export interface Row {
+export interface RowType {
   cells: import('react').ReactNode[]
   expanded?: import('react').ReactNode
   /** An identifier to keep track of this row. If undefined, the index will be used. */
@@ -44,7 +44,7 @@ export interface TableProps {
    */
   overflowFix?: boolean
   getColId?: (col: Column, colIndex: number, tableId: string) => string
-  rows: Row[]
+  rows: RowType[]
   expandedRowClassName?: string
   /** When a row is expanded, this `className` will be set on the second half of the table below the
    * expanded section. */
@@ -121,7 +121,7 @@ export const Tbody = styled.tbody`
 // HELPERS
 
 const Rows: FC<{
-  rows: Row[]
+  rows: RowType[]
   handleToggleBtnClick: (key: string | number) => void
   expandableRows: boolean
   openRowKey: string | number | null
