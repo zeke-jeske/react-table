@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "yarn clean && tsc --build --verbose",
-    "clean": "rm -rf dist tsconfig.tsbuildinfo"
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "publish": "npm publish"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.59.8",
