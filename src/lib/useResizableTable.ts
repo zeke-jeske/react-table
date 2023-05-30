@@ -13,7 +13,7 @@ function getTemplateColumns(columns: Column[], minCellWidth: number) {
 }
 
 /** A React custom hook that helps manage a table with resizable columns. */
-export function useResizableTable(
+export default function useResizableTable(
   columns: Column[],
   minCellWidth: number = DEFAULT_MIN_CELL_WIDTH
 ) {
@@ -53,48 +53,49 @@ export function useResizableTable(
     setActiveIndex(i)
   }
 
-  function mouseMove(e: MouseEvent) {
-    e.preventDefault()
-    if (activeIndex === null) return
-
-    // Get the current widths of all the columns
-    const widths = colRefs.current.map(
-      (colEl) => (colEl as HTMLTableCellElement).offsetWidth
-    )
-
-    const activeCol = colRefs.current[activeIndex] as HTMLTableCellElement
-
-    // Calculate the column width
-    let newColWidth = e.clientX - activeCol.getBoundingClientRect().left
-    if (newColWidth < minCellWidth) newColWidth = minCellWidth
-
-    // Ensure that the columns take up the full width of the table
-    const totalWidth = widths.reduce((acc, width) => acc + width, 0)
-    const tableWidth = (tableRef.current as HTMLTableElement).offsetWidth
-
-    if (totalWidth < tableWidth) {
-      widths[activeIndex] += tableWidth - totalWidth
-    }
-
-    // Make the update. Only the grid-template-column value corresponding to the modified column will be changed.
-    const newGridTemplateColumns = [...gridTemplateColumns]
-    newGridTemplateColumns[activeIndex] = `minmax(${newColWidth}px, 1fr)`
-
-    setGridTemplateColumns(newGridTemplateColumns)
-  }
-
-  function removeListeners() {
-    window.removeEventListener('mousemove', mouseMove)
-    window.removeEventListener('mouseup', removeListeners)
-  }
-
-  function mouseUp() {
-    setActiveIndex(null)
-    removeListeners()
-  }
-
   // Manage the window event listeners
   useEffect(() => {
+    function mouseMove(e: MouseEvent) {
+      e.preventDefault()
+      if (activeIndex === null) return
+
+      // Get the current widths of all the columns
+      const widths = colRefs.current.map(
+        (colEl) => (colEl as HTMLTableCellElement).offsetWidth
+      )
+
+      const activeCol = colRefs.current[activeIndex] as HTMLTableCellElement
+
+      // Calculate the column width
+      let newColWidth = e.clientX - activeCol.getBoundingClientRect().left
+      if (newColWidth < minCellWidth) newColWidth = minCellWidth
+
+      // Ensure that the columns take up the full width of the table
+      const totalWidth = widths.reduce((acc, width) => acc + width, 0)
+      const tableWidth = (tableRef.current as HTMLTableElement).offsetWidth
+
+      if (totalWidth < tableWidth) {
+        widths[activeIndex] += tableWidth - totalWidth
+      }
+
+      // Make the update. Only the grid-template-column value corresponding to the modified column will be changed.
+      const newGridTemplateColumns = [...gridTemplateColumns]
+      newGridTemplateColumns[activeIndex] = `minmax(${newColWidth}px, 1fr)`
+
+      setGridTemplateColumns(newGridTemplateColumns)
+    }
+
+    function removeListeners() {
+      window.removeEventListener('mousemove', mouseMove)
+      // eslint-disable-next-line no-use-before-define
+      window.removeEventListener('mouseup', mouseUp)
+    }
+
+    function mouseUp() {
+      setActiveIndex(null)
+      removeListeners()
+    }
+
     if (activeIndex !== null) {
       window.addEventListener('mousemove', mouseMove)
       window.addEventListener('mouseup', mouseUp)
@@ -103,7 +104,7 @@ export function useResizableTable(
     return () => {
       removeListeners()
     }
-  }, [activeIndex])
+  }, [activeIndex, gridTemplateColumns, minCellWidth])
 
   return {
     gridTemplateColumns: gridTemplateColumns.join(' '),

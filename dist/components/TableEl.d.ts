@@ -4,6 +4,6 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
     numRows: number;
     overflowFix: boolean;
 }
-declare const _default: import("react").ForwardRefExoticComponent<Props & import("react").RefAttributes<HTMLTableElement | null>>;
-export default _default;
+declare const TableEl: import("react").ForwardRefExoticComponent<Props & import("react").RefAttributes<HTMLTableElement | null>>;
+export default TableEl;
 //# sourceMappingURL=TableEl.d.ts.map

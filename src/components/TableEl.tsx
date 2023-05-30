@@ -65,44 +65,47 @@ const El = styled.table<{
 
 // COMPONENT
 
-export default forwardRef<HTMLTableElement | null, Props>(function TableEl(
-  { children, numRows, onScroll, overflowFix, ...props },
-  ref
-) {
-  const tableHeight = `calc(${ROW_HEIGHT} * ${numRows})`
+const TableEl = forwardRef<HTMLTableElement | null, Props>(
+  ({ children, numRows, onScroll, overflowFix, ...props }, ref) => {
+    const tableHeight = `calc(${ROW_HEIGHT} * ${numRows})`
 
-  if (overflowFix) {
-    return (
-      <Placeholder numRows={numRows} tableHeight={tableHeight}>
-        <OverflowContainer
-          onScroll={onScroll}
-          ref={ref}
-          tableHeight={tableHeight}
-        >
-          <El
-            numRows={numRows}
+    if (overflowFix) {
+      return (
+        <Placeholder numRows={numRows} tableHeight={tableHeight}>
+          <OverflowContainer
+            onScroll={onScroll}
+            ref={ref}
             tableHeight={tableHeight}
-            rowHeight={ROW_HEIGHT}
-            overflowFix={true}
-            {...props}
           >
-            {children}
-          </El>
-        </OverflowContainer>
-      </Placeholder>
+            <El
+              numRows={numRows}
+              tableHeight={tableHeight}
+              rowHeight={ROW_HEIGHT}
+              overflowFix={true}
+              {...props}
+            >
+              {children}
+            </El>
+          </OverflowContainer>
+        </Placeholder>
+      )
+    }
+
+    return (
+      <El
+        numRows={numRows}
+        tableHeight={tableHeight}
+        rowHeight={ROW_HEIGHT}
+        ref={ref}
+        onScroll={onScroll}
+        {...props}
+      >
+        {children}
+      </El>
     )
   }
+)
 
-  return (
-    <El
-      numRows={numRows}
-      tableHeight={tableHeight}
-      rowHeight={ROW_HEIGHT}
-      ref={ref}
-      onScroll={onScroll}
-      {...props}
-    >
-      {children}
-    </El>
-  )
-})
+TableEl.displayName = 'TableEl'
+
+export default TableEl

@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect, FC, MouseEvent, ReactNode } from 'react'
-import { useResizableTable } from '../lib/useResizableTable'
+import { useState, useRef, useEffect, FC } from 'react'
 import { styled } from 'styled-components'
+import useResizableTable from '../lib/useResizableTable'
 import Cell from './Cell'
 import TableEl from './TableEl'
 import RowContainer from './Row'
-import { isValidElement } from 'react'
 import ExpandedRow from './ExpandedRow'
 import RowToggleBtn from './RowToggleBtn'
 
@@ -71,10 +70,7 @@ export const Tbody = styled.tbody`
 
 const Rows: FC<{
   rows: Row[]
-  handleToggleBtnClick: (
-    key: string | number,
-    e: MouseEvent<HTMLButtonElement>
-  ) => void
+  handleToggleBtnClick: (key: string | number) => void
   expandableRows: boolean
   openRowKey: string | number | null
   /** Necessary to set the keys correctly in the afterRows table */
@@ -96,7 +92,7 @@ const Rows: FC<{
             <Cell>
               <RowToggleBtn
                 open={key === openRowKey}
-                onClick={(e) => handleToggleBtnClick(key, e)}
+                onClick={() => handleToggleBtnClick(key)}
               />
             </Cell>
           )}
@@ -136,8 +132,11 @@ const Table: FC<TableProps> = ({
   const [scrollLeft, setScrollLeft] = useState(0)
   /** Ref to the scrollable div containing the second HTML table element (containing invoices after the open row). */
   const secondTableRef = useRef<HTMLTableElement>(null)
-  let { gridTemplateColumns, colRefs, mouseDown, activeIndex, tableRef } =
-    useResizableTable(columns, minCellWidth)
+
+  const resizableTableStuff = useResizableTable(columns, minCellWidth)
+  let { gridTemplateColumns } = resizableTableStuff
+  const { colRefs, mouseDown, activeIndex, tableRef } = resizableTableStuff
+
   const [openRowKey, setOpenRowKey] = useState<string | number | null>(null)
 
   // When using expandable rows, we have the additional column containing the toggle buttons
@@ -174,10 +173,7 @@ const Table: FC<TableProps> = ({
 
   const afterRows = openRowIndex !== null ? rows.slice(openRowIndex + 1) : []
 
-  function handleToggleBtnClick(
-    key: string | number,
-    e: MouseEvent<HTMLButtonElement>
-  ) {
+  function handleToggleBtnClick(key: string | number) {
     setOpenRowKey((prev) => (prev === key ? null : key))
   }
 
