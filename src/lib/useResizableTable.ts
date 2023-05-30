@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { type Column } from '../components/Table'
 
 /** Default minimum cell width, in pixels. */
 const DEFAULT_MIN_CELL_WIDTH = 144

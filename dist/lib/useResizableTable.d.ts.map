@@ -1,1 +1,1 @@
-{"version":3,"file":"useResizableTable.d.ts","sourceRoot":"","sources":["../../src/lib/useResizableTable.ts"],"names":[],"mappings":";AAcA,4EAA4E;AAC5E,MAAM,CAAC,OAAO,UAAU,iBAAiB,CACvC,OAAO,EAAE,MAAM,EAAE,EACjB,YAAY,GAAE,MAA+B;;mBAkCvB,MAAM;;;;EAgE7B"}
+{"version":3,"file":"useResizableTable.d.ts","sourceRoot":"","sources":["../../src/lib/useResizableTable.ts"],"names":[],"mappings":";AACA,OAAO,EAAE,KAAK,MAAM,EAAE,MAAM,qBAAqB,CAAA;AAcjD,4EAA4E;AAC5E,MAAM,CAAC,OAAO,UAAU,iBAAiB,CACvC,OAAO,EAAE,MAAM,EAAE,EACjB,YAAY,GAAE,MAA+B;;mBAkCvB,MAAM;;;;EAgE7B"}

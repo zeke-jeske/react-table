@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { type Column } from '../components/Table';
 /** A React custom hook that helps manage a table with resizable columns. */
 export default function useResizableTable(columns: Column[], minCellWidth?: number): {
     gridTemplateColumns: string;

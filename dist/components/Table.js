@@ -35,6 +35,7 @@ const TableEl_1 = __importDefault(require("./TableEl"));
 const Row_1 = __importDefault(require("./Row"));
 const ExpandedRow_1 = __importDefault(require("./ExpandedRow"));
 const RowToggleBtn_1 = __importDefault(require("./RowToggleBtn"));
+// STYLES
 exports.Wrapper = styled_components_1.styled.div `
   /* TODO fix hydration errors */
   /* TODO get the toggle button to work */
@@ -89,6 +90,7 @@ exports.Thead = styled_components_1.styled.thead `
 exports.Tbody = styled_components_1.styled.tbody `
   display: contents;
 `;
+// HELPERS
 const Rows = ({ handleToggleBtnClick, expandableRows, openRowKey, rows, keyIndexOffset = 0, }) => (react_1.default.createElement(react_1.default.Fragment, null, rows.map((row, i) => {
     var _a;
     const key = (_a = row.key) !== null && _a !== void 0 ? _a : i + keyIndexOffset;
@@ -97,6 +99,7 @@ const Rows = ({ handleToggleBtnClick, expandableRows, openRowKey, rows, keyIndex
             react_1.default.createElement(RowToggleBtn_1.default, { open: key === openRowKey, onClick: () => handleToggleBtnClick(key) }))),
         row.cells.map((cell, j) => (react_1.default.createElement(Cell_1.default, { key: j }, cell)))));
 })));
+// COMPONENT
 const Table = ({ rows, columns, className, getColId, expandedRowClassName, secondTablePartClassName, wrapperClassName, expandableRows = false, id, minCellWidth, overflowFix = false, }) => {
     // Props validation
     if (!expandableRows) {
