@@ -7,7 +7,7 @@ interface Props {
   open: boolean
 }
 
-const Button = styled.button<{ open: boolean }>`
+const Button = styled.button<{ $open: boolean }>`
   --transition-duration: 0.1s;
   border: none;
   height: 1rem;
@@ -29,18 +29,18 @@ const Button = styled.button<{ open: boolean }>`
   }
 
   tr:hover &,
-  &:focus ${({ open }) => open && `, &`} {
+  &:focus ${({ $open }) => $open && `, &`} {
     transition: visibility 0s, opacity var(--transition-duration),
       transform var(--transition-duration), var(--focus-outline-transition);
     visibility: visible;
     opacity: 1;
   }
 
-  ${({ open }) => open && `transform: rotate(0.25turn);`}
+  ${({ $open }) => $open && `transform: rotate(0.25turn);`}
 `
 
-const RowToggleBtn: FC<Props> = (props) => (
-  <Button {...props} type="button">
+const RowToggleBtn: FC<Props> = ({ open, ...props }) => (
+  <Button $open={open} {...props} type="button">
     <BsChevronRight size="1rem" />
   </Button>
 )

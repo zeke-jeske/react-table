@@ -18,14 +18,14 @@ const ROW_HEIGHT = '3rem'
 
 // STYLED COMPONENTS
 
-const Placeholder = styled.div<{ numRows: number; tableHeight: string }>`
-  height: ${({ tableHeight }) => tableHeight};
+const Placeholder = styled.div<{ $numRows: number; $tableHeight: string }>`
+  height: ${({ $tableHeight }) => $tableHeight};
   box-sizing: border-box;
   position: relative;
 `
 
-const OverflowContainer = styled.div<{ tableHeight: string }>`
-  height: calc(${({ tableHeight }) => tableHeight} + 200px);
+const OverflowContainer = styled.div<{ $tableHeight: string }>`
+  height: calc(${({ $tableHeight }) => $tableHeight} + 200px);
   box-sizing: border-box;
   overflow-x: auto;
   position: absolute;
@@ -36,26 +36,26 @@ const OverflowContainer = styled.div<{ tableHeight: string }>`
 `
 
 const El = styled.table<{
-  numRows: number
-  tableHeight: string
-  rowHeight: string
-  overflowFix?: true
+  $numRows: number
+  $tableHeight: string
+  $rowHeight: string
+  $overflowFix?: true
 }>`
-  height: ${({ tableHeight }) => tableHeight};
+  height: ${({ $tableHeight }) => $tableHeight};
   box-sizing: border-box;
   min-width: 100%;
   font-size: 0.8rem;
   display: grid;
   grid-template-rows: repeat(
-    ${({ numRows }) => numRows},
-    ${({ rowHeight }) => rowHeight}
+    ${({ $numRows }) => $numRows},
+    ${({ $rowHeight }) => $rowHeight}
   );
 
   overflow-x: auto;
   ${noScrollbar}
 
-  ${({ overflowFix }) =>
-    overflowFix &&
+  ${({ $overflowFix }) =>
+    $overflowFix &&
     `
       position: absolute;
       top: 0;
@@ -71,17 +71,17 @@ const TableEl = forwardRef<HTMLTableElement | null, Props>(
 
     if (overflowFix) {
       return (
-        <Placeholder numRows={numRows} tableHeight={tableHeight}>
+        <Placeholder $numRows={numRows} $tableHeight={tableHeight}>
           <OverflowContainer
             onScroll={onScroll}
             ref={ref}
-            tableHeight={tableHeight}
+            $tableHeight={tableHeight}
           >
             <El
-              numRows={numRows}
-              tableHeight={tableHeight}
-              rowHeight={ROW_HEIGHT}
-              overflowFix={true}
+              $numRows={numRows}
+              $tableHeight={tableHeight}
+              $rowHeight={ROW_HEIGHT}
+              $overflowFix={true}
               {...props}
             >
               {children}
@@ -93,9 +93,9 @@ const TableEl = forwardRef<HTMLTableElement | null, Props>(
 
     return (
       <El
-        numRows={numRows}
-        tableHeight={tableHeight}
-        rowHeight={ROW_HEIGHT}
+        $numRows={numRows}
+        $tableHeight={tableHeight}
+        $rowHeight={ROW_HEIGHT}
         ref={ref}
         onScroll={onScroll}
         {...props}

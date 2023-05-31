@@ -99,7 +99,7 @@ export const ColTitle = styled.p`
   margin: 0;
 `
 
-export const ResizeHandle = styled.div<{ active: boolean }>`
+export const ResizeHandle = styled.div<{ $active: boolean }>`
   display: block;
   position: absolute;
   cursor: col-resize;
@@ -109,8 +109,8 @@ export const ResizeHandle = styled.div<{ active: boolean }>`
   top: 0;
   border-right: 2px solid transparent;
 
-  ${({ active }) =>
-    active
+  ${({ $active }) =>
+    $active
       ? `border-color: var(--resize-handle-active-color);`
       : `
         &:hover {
@@ -272,7 +272,7 @@ const Table: FC<TableProps> = ({
                 <ColTitle>{typeof col === 'string' ? col : col.name}</ColTitle>
                 {(typeof col === 'string' || !col.fixedSize) && (
                   <ResizeHandle
-                    active={i === activeIndex}
+                    $active={i === activeIndex}
                     onMouseDown={() => mouseDown(i)}
                   />
                 )}
